@@ -2,11 +2,13 @@ package id.ac.itb.stei.informatika.fifteenp;
 
 import id.ac.itb.stei.informatika.fifteenp.util.Direction;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
+import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrixBuilder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainController {
     @FXML
@@ -56,8 +58,6 @@ public class MainController {
     private Label dirLabel;
 
     @FXML
-    private Button randomButton;
-    @FXML
     private Button chooseFileButton;
 
     @FXML
@@ -76,6 +76,7 @@ public class MainController {
                 labelCell8, labelCell9, labelCell10, labelCell11,
                 labelCell12, labelCell13, labelCell14, labelCell15,
         };
+
     }
 
     @FXML
@@ -130,6 +131,24 @@ public class MainController {
         } else {
             this.enablePrevButton();
         }
+    }
+
+    @FXML
+    protected void onRandom() {
+        ArrayList<Integer> values = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            values.add(i + 1);
+        }
+        Random random = new Random();
+        FifteenMatrixBuilder builder = new FifteenMatrixBuilder();
+        values.add(null);
+        while (!values.isEmpty()) {
+            int size = values.size();
+            int i = (random.nextInt() % size + size) % size;
+            builder.append(values.remove(i));
+        }
+        FifteenMatrix matrix = builder.build();
+        this.matrixController.setMatrix(matrix);
     }
 
     private void disablePrevButton() {

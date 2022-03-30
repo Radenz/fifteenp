@@ -290,7 +290,7 @@
                                         prefHeight="36"
                                         prefWidth="64"
                                         text="RANDOM"
-                                        fx:id="randomButton"
+                                        onMouseClicked="#onRandom"
                                 />
                             </HBox>
                         </VBox>
