@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class Matrix<T> {
 
-    private final int rows;
-    private final int cols;
+    protected final int rows;
+    protected final int cols;
 
     ArrayList<ArrayList<T>> values;
 
