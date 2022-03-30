@@ -6,6 +6,7 @@ import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrixBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class FifteenPuzzle {
@@ -18,19 +19,23 @@ public class FifteenPuzzle {
 
     public static void main(String[] args) {
         FifteenMatrixBuilder builder = new FifteenMatrixBuilder();
-        builder.append(1).append(2).append(3).append(4);
-        builder.append(5).append(6).append(null).append(8);
-        builder.append(9).append(10).append(7).append(11);
-        builder.append(13).append(14).append(15).append(12);
+        builder.append(3).append(1).append(2).append(4);
+        builder.append(null).append(5).append(7).append(8);
+        builder.append(10).append(6).append(11).append(12);
+        builder.append(9).append(13).append(14).append(15);
 
         FifteenMatrix puzzle = builder.build();
         FifteenPuzzle solver = new FifteenPuzzle(puzzle);
+
+        double start = System.nanoTime();
         solver.solve();
+        double end = System.nanoTime();
 
         ArrayList<FifteenMatrix> path = solver.getSolutionPathMatrix();
         ArrayList<Direction> pathDir = solver.getSolutionPathDir();
 
-        System.out.println();
+        System.out.println((end - start) * 1e-9 + " seconds.");
+
     }
 
     private static final FifteenMatrix SOLUTION
@@ -43,7 +48,7 @@ public class FifteenPuzzle {
 
     public FifteenPuzzle(FifteenMatrix puzzle) {
         this.puzzle = puzzle;
-        this.queue = new PriorityQueue<>((a, b) -> b.cost() - a.cost());
+        this.queue = new PriorityQueue<>(Comparator.comparingInt(FifteenMatrixNode::cost));
         this.evaluatedStates = new ArrayList<>();
         this.solutionPathMatrix = new ArrayList<>();
         this.solutionPathDir = new ArrayList<>();
@@ -56,7 +61,6 @@ public class FifteenPuzzle {
         FifteenMatrixNode state = this.queue.poll();
         while (!state.value().equals(FifteenPuzzle.SOLUTION)) {
             this.expand(state);
-
             state = this.queue.poll();
         }
 
@@ -99,19 +103,22 @@ public class FifteenPuzzle {
     }
 
     private void expand(FifteenMatrixNode state) {
+
         for (Direction dir: Direction.DIRECTIONS) {
             try {
                 FifteenMatrix newMatrix = state.value()
                         .moveBlankTile(dir);
                 if (!this.has(newMatrix)) {
-                    this.queue.offer(
-                            new FifteenMatrixNode(
-                                    newMatrix,
-                                    state,
-                                    dir,
-                                    state.depth() + 1
-                            )
+                    FifteenMatrixNode node = new FifteenMatrixNode(
+                            newMatrix,
+                            state,
+                            dir,
+                            state.depth() + 1
                     );
+                    this.queue.offer(
+                        node
+                    );
+
                 }
             } catch (IndexOutOfBoundsException ignored) {
 
@@ -126,13 +133,12 @@ public class FifteenPuzzle {
                 this.evaluatedStates.size() - 1
         );
 
-
         while (node.parent() != null) {
             this.solutionPathMatrix.add(node.value());
             this.solutionPathDir.add(node.dir());
-
             node = node.parent();
         }
+        this.solutionPathMatrix.add(node.value());
 
         Collections.reverse(this.solutionPathMatrix);
         Collections.reverse(this.solutionPathDir);
@@ -153,5 +159,9 @@ record FifteenMatrixNode(FifteenMatrix value,
                          int depth) {
     public int cost() {
         return this.parent().depth() + this.value().mismatchedTiles();
+    }
+
+    public String toString() {
+        return this.value.toString();
     }
 }
