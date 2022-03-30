@@ -172,10 +172,6 @@ public class FifteenMatrix extends Matrix<Integer> {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 Integer elem = this.values.get(i).get(j);
-
-                if (elem == null) {
-                    mismatches++;
-                }
                 if (elem != null && elem != 4 * i + j + 1) {
                     mismatches++;
                 }
