@@ -89,9 +89,16 @@ public class MainController {
 
     @FXML
     protected void onSolve() {
+        FifteenMatrix matrix = null;
         try {
             this.currentDepth = 0;
-            FifteenMatrix matrix = matrixController.parse();
+            matrix = matrixController.parse();
+        } catch (IllegalArgumentException ignored) {
+            this.alert("The given matrix is invalid.");
+            return;
+        }
+
+        try {
             this.displayLowerValues(matrix);
             FifteenPuzzle solver = new FifteenPuzzle(matrix);
             long start = System.nanoTime();
@@ -108,7 +115,7 @@ public class MainController {
             }
             this.setLabelText(1, this.solutionPath.size());
         } catch (IllegalArgumentException ignored) {
-            this.alertInvalidInput();
+            this.alert("The puzzle is unsolvable.");
         }
     }
 
@@ -176,14 +183,18 @@ public class MainController {
         FileReader reader = new FileReader();
         try {
             reader.readFile(filename);
+        } catch (Throwable ignored) {
+            this.alert("There was an error reading the file.");
+        }
+
+        try {
             String fileContent = reader.result();
             FifteenMatrixParser parser = new FifteenMatrixParser();
             parser.parse(fileContent);
             this.matrixController.setMatrix(parser.result());
         } catch (Throwable ignored) {
-            this.alertInvalidInput();
+            this.alert("The file has an invalid format.");
         }
-
     }
 
     private void setLabelText(int depth, int maxDepth) {
@@ -228,9 +239,9 @@ public class MainController {
         this.execTimeLabel.setText(execTime);
     }
 
-    private void alertInvalidInput() {
+    private void alert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText("Invalid input !");
+        alert.setContentText(message);
         alert.show();
     }
 
