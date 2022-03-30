@@ -71,6 +71,7 @@
                         <GridPane
                                 GridPane.columnIndex="0"
                                 gridLinesVisible="true"
+                                stylesheets="@style.css"
                         >
                             <rowConstraints>
                                 <RowConstraints
@@ -101,102 +102,166 @@
                                 />
                             </columnConstraints>
                             <children>
-                                <Label
-                                        GridPane.rowIndex="0"
-                                        GridPane.columnIndex="0"
-                                        fx:id="labelCell0"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="0"
-                                        GridPane.columnIndex="1"
-                                        fx:id="labelCell1"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="0"
-                                        GridPane.columnIndex="2"
-                                        fx:id="labelCell2"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="0"
-                                        GridPane.columnIndex="3"
-                                        fx:id="labelCell3"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="1"
-                                        GridPane.columnIndex="0"
-                                        fx:id="labelCell4"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="1"
-                                        GridPane.columnIndex="1"
-                                        fx:id="labelCell5"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="1"
-                                        GridPane.columnIndex="2"
-                                        fx:id="labelCell6"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="1"
-                                        GridPane.columnIndex="3"
-                                        fx:id="labelCell7"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="2"
-                                        GridPane.columnIndex="0"
-                                        fx:id="labelCell8"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="2"
-                                        GridPane.columnIndex="1"
-                                        fx:id="labelCell9"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="2"
-                                        GridPane.columnIndex="2"
-                                        fx:id="labelCell10"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="2"
-                                        GridPane.columnIndex="3"
-                                        fx:id="labelCell11"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="3"
-                                        GridPane.columnIndex="0"
-                                        fx:id="labelCell12"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="3"
-                                        GridPane.columnIndex="1"
-                                        fx:id="labelCell13"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="3"
-                                        GridPane.columnIndex="2"
-                                        fx:id="labelCell14"
-                                        styleClass="centered"
-                                />
-                                <Label
-                                        GridPane.rowIndex="3"
-                                        GridPane.columnIndex="3"
-                                        fx:id="labelCell15"
-                                        styleClass="centered"
-                                />
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="0"
+                                      GridPane.columnIndex="0"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell0"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="0"
+                                      GridPane.columnIndex="1"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell1"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="0"
+                                      GridPane.columnIndex="2"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell2"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="0"
+                                      GridPane.columnIndex="3"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell3"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="1"
+                                      GridPane.columnIndex="0"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell4"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="1"
+                                      GridPane.columnIndex="1"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell5"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="1"
+                                      GridPane.columnIndex="2"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell6"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="1"
+                                      GridPane.columnIndex="3"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell7"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="2"
+                                      GridPane.columnIndex="0"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell8"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="2"
+                                      GridPane.columnIndex="1"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell9"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="2"
+                                      GridPane.columnIndex="2"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell10"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="2"
+                                      GridPane.columnIndex="3"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell11"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="3"
+                                      GridPane.columnIndex="0"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell12"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="3"
+                                      GridPane.columnIndex="1"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell13"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="3"
+                                      GridPane.columnIndex="2"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell14"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="3"
+                                      GridPane.columnIndex="3"
+                                >
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                fx:id="labelCell15"
+                                        />
+                                    </HBox>
+                                </VBox>
                             </children>
                         </GridPane>
                         <VBox alignment="CENTER"
@@ -320,11 +385,11 @@
                             </HBox>
                         </VBox>
                         <VBox alignment="CENTER"
-                              GridPane.columnIndex="0"
+                              GridPane.columnIndex="1"
                               GridPane.rowIndex="1">
                             <HBox alignment="CENTER">
                                 <Label
-                                        fx:id="signatureLabel"
+                                        fx:id="stateLabel"
                                 />
                             </HBox>
                         </VBox>

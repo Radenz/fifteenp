@@ -151,6 +151,10 @@ public class FifteenPuzzle {
     public ArrayList<Direction> getSolutionPathDir() {
         return this.solutionPathDir;
     }
+
+    public int generatedStates() {
+        return this.queue.size() + this.evaluatedStates.size();
+    }
 }
 
 record FifteenMatrixNode(FifteenMatrix value,

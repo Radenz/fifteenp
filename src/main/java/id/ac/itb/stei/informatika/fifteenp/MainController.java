@@ -5,6 +5,7 @@ import id.ac.itb.stei.informatika.fifteenp.io.FileReader;
 import id.ac.itb.stei.informatika.fifteenp.util.Direction;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -60,6 +61,8 @@ public class MainController {
     private Button nextButton;
     @FXML
     private Label dirLabel;
+    @FXML
+    private Label stateLabel;
 
     @FXML
     private Button chooseFileButton;
@@ -72,6 +75,8 @@ public class MainController {
     private ArrayList<Direction> solutionDir;
     private int currentDepth;
     private final Font defaultFont = Font.font("Arial", FontWeight.BOLD, 16);
+    private final Font defaultFontSmall = Font.font("Arial", FontWeight.BOLD, 12);
+    private final Font defaultFontBig = Font.font("Arial", FontWeight.BOLD, 20);
     private final String[] postfix = {"ns", "us", "ms", "s"};
 
     @FXML
@@ -82,9 +87,14 @@ public class MainController {
                 labelCell8, labelCell9, labelCell10, labelCell11,
                 labelCell12, labelCell13, labelCell14, labelCell15,
         };
-        this.dirLabel.setFont(this.defaultFont);
+        this.dirLabel.setFont(this.defaultFontBig);
         this.nextButton.setFont(this.defaultFont);
         this.prevButton.setFont(this.defaultFont);
+        for (Label cell: this.labelCells) {
+            cell.setFont(this.defaultFont);
+        }
+        this.execTimeLabel.setFont(this.defaultFontSmall);
+        this.stateLabel.setFont(this.defaultFontSmall);
     }
 
     @FXML
@@ -109,13 +119,14 @@ public class MainController {
             this.solutionDir = solver.getSolutionPathDir();
             this.matrixController.setMatrix(this.solutionPath.get(0));
             this.disablePrevButton();
+            this.setGeneratedStatesText(solver.generatedStates());
             if (this.solutionDir.size() != 0) {
                 this.matrixController.setDirection(this.solutionDir.get(0));
                 this.enableNextButton();
             }
             this.setLabelText(1, this.solutionPath.size());
         } catch (IllegalArgumentException ignored) {
-            this.alert("The puzzle is unsolvable.");
+            this.alert("This puzzle is unsolvable.");
         }
     }
 
@@ -157,7 +168,7 @@ public class MainController {
     @FXML
     protected void onRandom() {
         Random random = new Random();
-        int steps = (random.nextInt() % 30 + 30) % 30 + 8;
+        int steps = (random.nextInt() % 28 + 28) % 28 + 12;
         FifteenMatrix matrix = FifteenPuzzle.SOLUTION.copy();
         for (int i = 0; i < steps; i++) {
             while (true) {
@@ -199,6 +210,11 @@ public class MainController {
 
     private void setLabelText(int depth, int maxDepth) {
         this.dirLabel.setText(depth + "/" + maxDepth);
+    }
+
+    private void setGeneratedStatesText(Integer states) {
+        this.stateLabel.setText("Generated "
+                + states.toString() + " states");
     }
 
     private void disablePrevButton() {
