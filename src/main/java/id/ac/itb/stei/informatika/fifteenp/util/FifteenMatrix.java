@@ -125,7 +125,7 @@ public class FifteenMatrix extends Matrix<Integer> {
             return this.lowerNull();
         }
 
-        if (value < 0 || value > 15) {
+        if (value < 1 || value > 15) {
             throw new IllegalArgumentException();
         }
 

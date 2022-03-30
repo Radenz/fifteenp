@@ -69,6 +69,7 @@ public class MainController {
     private ArrayList<Direction> solutionDir;
     private int currentDepth;
     private final Font defaultFont = Font.font("Arial", FontWeight.BOLD, 16);
+    private final String[] postfix = {"ns", "us", "ms", "s"};
 
     @FXML
     private void initialize() {
@@ -79,6 +80,8 @@ public class MainController {
                 labelCell12, labelCell13, labelCell14, labelCell15,
         };
         this.dirLabel.setFont(this.defaultFont);
+        this.nextButton.setFont(this.defaultFont);
+        this.prevButton.setFont(this.defaultFont);
     }
 
     @FXML
@@ -86,8 +89,12 @@ public class MainController {
         try {
             this.currentDepth = 0;
             FifteenMatrix matrix = matrixController.parse();
+            this.displayLowerValues(matrix);
             FifteenPuzzle solver = new FifteenPuzzle(matrix);
+            long start = System.nanoTime();
             solver.solve();
+            long end = System.nanoTime();
+            this.displayExecutionTime(end - start);
             this.solutionPath = solver.getSolutionPathMatrix();
             this.solutionDir = solver.getSolutionPathDir();
             this.matrixController.setMatrix(this.solutionPath.get(0));
@@ -140,7 +147,7 @@ public class MainController {
     @FXML
     protected void onRandom() {
         Random random = new Random();
-        int steps = (random.nextInt() % 20 + 20) % 20 + 8;
+        int steps = (random.nextInt() % 30 + 30) % 30 + 8;
         FifteenMatrix matrix = FifteenPuzzle.SOLUTION.copy();
         for (int i = 0; i < steps; i++) {
             while (true) {
@@ -175,5 +182,27 @@ public class MainController {
 
     private void enableNextButton() {
         nextButton.setDisable(false);
+    }
+
+    private void displayLowerValues(FifteenMatrix matrix) {
+        for (int i = 1; i < 16; i++) {
+            Integer l = matrix.lower(i);
+            this.labelCells[i - 1].setText(l.toString());
+        }
+        Integer l = matrix.lowerNull();
+        this.labelCells[15].setText(l.toString());
+    }
+
+    private void displayExecutionTime(double duration) {
+        int i = 0;
+        double factor = 1;
+        while (i < 3 && duration * factor > 100) {
+            factor *= 1e-3;
+            i++;
+        }
+        String durationString = String.format("%.3f", duration * factor);
+        String execTime = "Solved in " + durationString
+                + " " + this.postfix[i];
+        this.execTimeLabel.setText(execTime);
     }
 }

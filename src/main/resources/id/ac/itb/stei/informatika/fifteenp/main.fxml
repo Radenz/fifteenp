@@ -235,7 +235,7 @@
                                 <Button
                                         prefHeight="72"
                                         prefWidth="72"
-                                        text="&lt;"
+                                        text="&#x00ab;"
                                         fx:id="prevButton"
                                         disable="true"
                                         onMouseClicked="#onPrev"
@@ -259,7 +259,7 @@
                                 <Button
                                         prefHeight="72"
                                         prefWidth="72"
-                                        text="&gt;"
+                                        text="&#x00bb;"
                                         disable="true"
                                         fx:id="nextButton"
                                         onMouseClicked="#onNext"
