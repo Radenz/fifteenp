@@ -4,5 +4,12 @@ public enum Direction {
     UP,
     DOWN,
     RIGHT,
-    LEFT
+    LEFT;
+
+    public static final Direction[] DIRECTIONS = {
+            Direction.DOWN,
+            Direction.RIGHT,
+            Direction.LEFT,
+            Direction.UP,
+    };
 }
