@@ -1,5 +1,7 @@
 package id.ac.itb.stei.informatika.fifteenp.util;
 
+import java.util.Objects;
+
 public class FifteenMatrix extends Matrix<Integer> {
 
     public FifteenMatrix() {
@@ -102,8 +104,7 @@ public class FifteenMatrix extends Matrix<Integer> {
     public boolean equals(FifteenMatrix other) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if (this.values.get(i).get(j)
-                != other.values.get(i).get(j)) {
+                if (!Objects.equals(this.values.get(i).get(j), other.values.get(i).get(j))) {
                     return false;
                 }
             }
@@ -172,7 +173,10 @@ public class FifteenMatrix extends Matrix<Integer> {
             for (int j = 0; j < 4; j++) {
                 Integer elem = this.values.get(i).get(j);
 
-                if (elem != null && elem != 4 * i + j) {
+                if (elem == null) {
+                    mismatches++;
+                }
+                if (elem != null && elem != 4 * i + j + 1) {
                     mismatches++;
                 }
             }
