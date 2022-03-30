@@ -88,7 +88,11 @@ public class MainController {
             this.solutionPath = solver.getSolutionPathMatrix();
             this.solutionDir = solver.getSolutionPathDir();
             this.matrixController.setMatrix(this.solutionPath.get(0));
-            this.matrixController.setDirection(this.solutionDir.get(0));
+            this.disablePrevButton();
+            if (this.solutionDir.size() != 0) {
+                this.matrixController.setDirection(this.solutionDir.get(0));
+                this.enableNextButton();
+            }
         } catch (IllegalArgumentException ignored) {
 
         }
@@ -96,9 +100,17 @@ public class MainController {
 
     @FXML
     protected void onNext() {
+        this.enablePrevButton();
         this.currentDepth++;
         this.matrixController.setMatrix(this.solutionPath.get(
                         this.currentDepth));
+        if (this.currentDepth == this.solutionDir.size()) {
+            this.matrixController.setDirection(null);
+        } else {
+            this.matrixController.setDirection(this.solutionDir.get(
+                    this.currentDepth));
+        }
+
         if (this.currentDepth + 1 == this.solutionPath.size()) {
             this.disableNextButton();
         } else {
@@ -107,8 +119,11 @@ public class MainController {
     }
 
     @FXML void onPrev() {
+        this.enableNextButton();
         this.currentDepth--;
         this.matrixController.setMatrix(this.solutionPath.get(
+                this.currentDepth));
+        this.matrixController.setDirection(this.solutionDir.get(
                 this.currentDepth));
         if (this.currentDepth == 0) {
             this.disablePrevButton();

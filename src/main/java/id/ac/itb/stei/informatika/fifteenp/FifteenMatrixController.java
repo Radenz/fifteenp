@@ -5,6 +5,8 @@ import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrixBuilder;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -42,18 +44,27 @@ public class FifteenMatrixController {
     @FXML
     private TextArea cell15;
 
-    private TextArea[] CELLS;
+    private TextArea[] cells;
+    private FifteenMatrix currentMatrix;
+    private Border borderStyle;
 
     @FXML
     public void initialize() {
-        CELLS = new TextArea[]{
+        this.borderStyle = new Border(new BorderStroke(
+                Color.valueOf("#42a5f5"),
+                BorderStrokeStyle.DASHED,
+                CornerRadii.EMPTY,
+                new BorderWidths(2)
+        ));
+
+        this.cells = new TextArea[]{
                 cell0, cell1, cell2, cell3,
                 cell4, cell5, cell6, cell7,
                 cell8, cell9, cell10, cell11,
                 cell12, cell13, cell14, cell15,
         };
 
-        for (TextArea cell: CELLS) {
+        for (TextArea cell: this.cells) {
 
             cell.setFont(
                     Font.font("Arial", FontWeight.BOLD, 24)
@@ -73,9 +84,10 @@ public class FifteenMatrixController {
     }
 
     public void setMatrix(FifteenMatrix matrix) {
+        this.currentMatrix = matrix;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                TextArea cell = this.CELLS[i * 4 + j];
+                TextArea cell = this.cells[i * 4 + j];
                 Integer value = matrix.get(i, j);
                 if (value == null) {
                     cell.setText("");
@@ -87,12 +99,27 @@ public class FifteenMatrixController {
     }
 
     public void setDirection(Direction dir) {
-
+        for (TextArea cell: this.cells) {
+            cell.setBorder(null);
+        }
+        if (dir != null) {
+            int blankTileIndex = this.currentMatrix.blankTileIndex();
+            int swapIndex = switch (dir) {
+                case UP -> blankTileIndex - 4;
+                case DOWN -> blankTileIndex + 4;
+                case RIGHT -> blankTileIndex + 1;
+                case LEFT -> blankTileIndex - 1;
+            };
+            TextArea blankTileCell = this.cells[blankTileIndex];
+            TextArea swapCell = this.cells[swapIndex];
+            blankTileCell.setBorder(this.borderStyle);
+            swapCell.setBorder(this.borderStyle);
+        }
     }
 
     public FifteenMatrix parse() {
         FifteenMatrixBuilder builder = new FifteenMatrixBuilder();
-        for (TextArea cell: CELLS) {
+        for (TextArea cell: cells) {
             Integer value;
             if (cell.getText().equals("")) {
                 value = null;
