@@ -1,0 +1,4 @@
+.centered *.text {
+    -fx-text-alignment: center;
+    -fx-background-color: blue;
+}
