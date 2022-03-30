@@ -271,6 +271,7 @@
                 <GridPane
                         GridPane.columnIndex="2"
                         gridLinesVisible="true"
+                        hgap="4"
                         style="-fx-padding: 24;"
                 >
                     <rowConstraints>
@@ -288,7 +289,8 @@
                             <HBox alignment="CENTER">
                                 <Button
                                         prefHeight="36"
-                                        prefWidth="64"
+                                        prefWidth="96"
+                                        maxWidth="Infinity"
                                         text="RANDOM"
                                         onMouseClicked="#onRandom"
                                 />
@@ -300,9 +302,11 @@
                             <HBox alignment="CENTER">
                                 <Button
                                         prefHeight="36"
-                                        prefWidth="64"
+                                        prefWidth="96"
+                                        maxWidth="Infinity"
                                         text="Choose File ..."
                                         fx:id="chooseFileButton"
+                                        onMouseClicked="#onChooseFile"
                                 />
                             </HBox>
                         </VBox>

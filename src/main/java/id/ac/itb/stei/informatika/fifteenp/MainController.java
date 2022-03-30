@@ -1,19 +1,22 @@
 package id.ac.itb.stei.informatika.fifteenp;
 
+import id.ac.itb.stei.informatika.fifteenp.io.FifteenMatrixParser;
+import id.ac.itb.stei.informatika.fifteenp.io.FileReader;
 import id.ac.itb.stei.informatika.fifteenp.util.Direction;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class MainController {
-    @FXML
-    private Label welcomeText;
 
     @FXML
     private FifteenMatrixController matrixController;
@@ -105,7 +108,7 @@ public class MainController {
             }
             this.setLabelText(1, this.solutionPath.size());
         } catch (IllegalArgumentException ignored) {
-
+            this.alertInvalidInput();
         }
     }
 
@@ -164,6 +167,25 @@ public class MainController {
         this.matrixController.setMatrix(matrix);
     }
 
+    @FXML
+    private void onChooseFile() {
+        FileChooser dialog = new FileChooser();
+        File input = dialog.showOpenDialog(null);
+        String filename = input.toString();
+
+        FileReader reader = new FileReader();
+        try {
+            reader.readFile(filename);
+            String fileContent = reader.result();
+            FifteenMatrixParser parser = new FifteenMatrixParser();
+            parser.parse(fileContent);
+            this.matrixController.setMatrix(parser.result());
+        } catch (Throwable ignored) {
+            this.alertInvalidInput();
+        }
+
+    }
+
     private void setLabelText(int depth, int maxDepth) {
         this.dirLabel.setText(depth + "/" + maxDepth);
     }
@@ -205,4 +227,11 @@ public class MainController {
                 + " " + this.postfix[i];
         this.execTimeLabel.setText(execTime);
     }
+
+    private void alertInvalidInput() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText("Invalid input !");
+        alert.show();
+    }
+
 }
