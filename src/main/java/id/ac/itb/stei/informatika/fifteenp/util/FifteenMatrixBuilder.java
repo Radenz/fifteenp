@@ -1,5 +1,7 @@
 package id.ac.itb.stei.informatika.fifteenp.util;
 
+import java.util.ArrayList;
+
 public class FifteenMatrixBuilder {
     private Integer[] values;
     private int cursor;
@@ -13,7 +15,11 @@ public class FifteenMatrixBuilder {
     }
 
     public FifteenMatrixBuilder append(Integer value) {
-        if (this.cursor > 15) {
+        if (value != null && (value < 0 || value > 15)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (this.cursor > 16) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -25,22 +31,31 @@ public class FifteenMatrixBuilder {
 
     public FifteenMatrix build() {
         FifteenMatrix puzzle = new FifteenMatrix();
+        ArrayList<Boolean> flags = new ArrayList<>();
 
-        int nulls = 0;
+        int count = 16;
+        while (count-- != 0) {
+            flags.add(false);
+        }
+
         for (int i = 0; i < 16; i++) {
+            int flagIndex;
+
             if (this.values[i] == null) {
-                nulls += 1;
+                flagIndex = 15;
+            } else {
+                flagIndex = this.values[i] - 1;
             }
 
             int row = i / 4;
             int col = i % 4;
             puzzle.set(row, col, this.values[i]);
-        }
 
-        if (nulls != 1) {
-            throw new IllegalArgumentException(
-                    "15-Puzzle matrix must contains exactly 1 empty cell."
-            );
+            if (flags.get(flagIndex)) {
+                throw new IllegalArgumentException();
+            } else {
+                flags.set(flagIndex, true);
+            }
         }
 
         return puzzle;
