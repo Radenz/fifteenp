@@ -38,7 +38,7 @@ public class FifteenPuzzle {
 
     }
 
-    private static final FifteenMatrix SOLUTION
+    public static final FifteenMatrix SOLUTION
         = new FifteenMatrixBuilder()
             .append(1).append(2).append(3).append(4)
             .append(5).append(6).append(7).append(8)

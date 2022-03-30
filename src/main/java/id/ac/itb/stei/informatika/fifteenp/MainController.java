@@ -2,10 +2,11 @@ package id.ac.itb.stei.informatika.fifteenp;
 
 import id.ac.itb.stei.informatika.fifteenp.util.Direction;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
-import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrixBuilder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -67,6 +68,7 @@ public class MainController {
     private ArrayList<FifteenMatrix> solutionPath;
     private ArrayList<Direction> solutionDir;
     private int currentDepth;
+    private final Font defaultFont = Font.font("Arial", FontWeight.BOLD, 16);
 
     @FXML
     private void initialize() {
@@ -76,7 +78,7 @@ public class MainController {
                 labelCell8, labelCell9, labelCell10, labelCell11,
                 labelCell12, labelCell13, labelCell14, labelCell15,
         };
-
+        this.dirLabel.setFont(this.defaultFont);
     }
 
     @FXML
@@ -94,6 +96,7 @@ public class MainController {
                 this.matrixController.setDirection(this.solutionDir.get(0));
                 this.enableNextButton();
             }
+            this.setLabelText(1, this.solutionPath.size());
         } catch (IllegalArgumentException ignored) {
 
         }
@@ -111,7 +114,7 @@ public class MainController {
             this.matrixController.setDirection(this.solutionDir.get(
                     this.currentDepth));
         }
-
+        this.setLabelText(this.currentDepth + 1, this.solutionPath.size());
         if (this.currentDepth + 1 == this.solutionPath.size()) {
             this.disableNextButton();
         } else {
@@ -126,6 +129,7 @@ public class MainController {
                 this.currentDepth));
         this.matrixController.setDirection(this.solutionDir.get(
                 this.currentDepth));
+        this.setLabelText(this.currentDepth + 1, this.solutionPath.size());
         if (this.currentDepth == 0) {
             this.disablePrevButton();
         } else {
@@ -135,20 +139,26 @@ public class MainController {
 
     @FXML
     protected void onRandom() {
-        ArrayList<Integer> values = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            values.add(i + 1);
-        }
         Random random = new Random();
-        FifteenMatrixBuilder builder = new FifteenMatrixBuilder();
-        values.add(null);
-        while (!values.isEmpty()) {
-            int size = values.size();
-            int i = (random.nextInt() % size + size) % size;
-            builder.append(values.remove(i));
+        int steps = (random.nextInt() % 20 + 20) % 20 + 8;
+        FifteenMatrix matrix = FifteenPuzzle.SOLUTION.copy();
+        for (int i = 0; i < steps; i++) {
+            while (true) {
+                int dirIndex = (random.nextInt() % 4 + 4) % 4;
+                try {
+                    matrix = matrix.moveBlankTile(
+                            Direction.DIRECTIONS[dirIndex]
+                    );
+                    break;
+                } catch (IndexOutOfBoundsException ignored) {
+                }
+            }
         }
-        FifteenMatrix matrix = builder.build();
         this.matrixController.setMatrix(matrix);
+    }
+
+    private void setLabelText(int depth, int maxDepth) {
+        this.dirLabel.setText(depth + "/" + maxDepth);
     }
 
     private void disablePrevButton() {
