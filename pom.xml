@@ -70,7 +70,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                id.ac.itb.stei.informatika.fifteenp/id.ac.itb.stei.informatika.fifteenp.HelloApplication
+                                id.ac.itb.stei.informatika.fifteenp/id.ac.itb.stei.informatika.fifteenp.Application
                             </mainClass>
                         </configuration>
                     </execution>
