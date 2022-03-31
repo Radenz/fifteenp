@@ -1,5 +1,7 @@
 package id.ac.itb.stei.informatika.fifteenp.util;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class FifteenMatrix extends Matrix<Integer> {
@@ -207,6 +209,41 @@ public class FifteenMatrix extends Matrix<Integer> {
                 .set(firstIndex % 4, b);
         this.values.get(secondIndex / 4)
                 .set(secondIndex % 4, a);
+    }
+
+    public static FifteenMatrix from(long id) {
+        ArrayList<Integer> values = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                int value = (int) (((id % 16) + 16) % 16);
+                if (value == 0) {
+                    values.add(null);
+                } else {
+                    values.add(value);
+                }
+                id >>= 4;
+            }
+        }
+        Collections.reverse(values);
+        FifteenMatrixBuilder builder = new FifteenMatrixBuilder();
+        for (Integer value: values) {
+            builder.append(value);
+        }
+        return builder.build();
+    }
+
+    public long identity() {
+        long id = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                id <<= 4;
+                Integer elem = this.values.get(i).get(j);
+                if (elem != null) {
+                    id += elem;
+                }
+            }
+        }
+        return id;
     }
 
 }

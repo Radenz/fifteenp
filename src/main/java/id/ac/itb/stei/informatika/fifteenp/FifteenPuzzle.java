@@ -4,6 +4,7 @@ import id.ac.itb.stei.informatika.fifteenp.util.Direction;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrixBuilder;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -46,6 +47,9 @@ public class FifteenPuzzle {
             .append(13).append(14).append(15).append(null)
             .build();
 
+    public static final long SOLUTION_ID
+            = FifteenPuzzle.SOLUTION.identity();
+
     public FifteenPuzzle(FifteenMatrix puzzle) {
         this.puzzle = puzzle;
         this.queue = new PriorityQueue<>(Comparator.comparingInt(FifteenMatrixNode::cost));
@@ -59,7 +63,7 @@ public class FifteenPuzzle {
         this.setup();
 
         FifteenMatrixNode state = this.queue.poll();
-        while (!state.value().equals(FifteenPuzzle.SOLUTION)) {
+        while (state.matrixId() != FifteenPuzzle.SOLUTION_ID) {
             this.expand(state);
             state = this.queue.poll();
         }
@@ -79,22 +83,39 @@ public class FifteenPuzzle {
 
     private void setup() {
         this.queue.add(new FifteenMatrixNode(
-                this.puzzle,
+                this.puzzle.identity(),
                 null,
                 null,
+                1,
                 1
         ));
     }
 
-    private boolean has(FifteenMatrix state) {
+//    private boolean has(FifteenMatrix state) {
+//        for (FifteenMatrixNode node: this.evaluatedStates) {
+//            if (node.value().equals(state)) {
+//                return true;
+//            }
+//        }
+//
+//        for (FifteenMatrixNode node: this.queue) {
+//            if (node.value().equals(state)) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
+
+    private boolean has(long stateMatrixId) {
         for (FifteenMatrixNode node: this.evaluatedStates) {
-            if (node.value().equals(state)) {
+            if (node.matrixId() == stateMatrixId) {
                 return true;
             }
         }
 
         for (FifteenMatrixNode node: this.queue) {
-            if (node.value().equals(state)) {
+            if (node.matrixId() == stateMatrixId) {
                 return true;
             }
         }
@@ -103,17 +124,23 @@ public class FifteenPuzzle {
     }
 
     private void expand(FifteenMatrixNode state) {
+        int states = this.queue.size() + this.evaluatedStates.size();
+        if (states % 1000 == 0) {
+            System.out.println(states);
+        }
 
         for (Direction dir: Direction.DIRECTIONS) {
             try {
-                FifteenMatrix newMatrix = state.value()
+                FifteenMatrix newMatrix = FifteenMatrix.from(state.matrixId())
                         .moveBlankTile(dir);
-                if (!this.has(newMatrix)) {
+                long newMatrixId = newMatrix.identity();
+                if (!this.has(newMatrixId)) {
                     FifteenMatrixNode node = new FifteenMatrixNode(
-                            newMatrix,
+                            newMatrixId,
                             state,
                             dir,
-                            state.depth() + 1
+                            state.depth() + 1,
+                            state.depth() + newMatrix.mismatchedTiles()
                     );
                     this.queue.offer(
                         node
@@ -134,11 +161,15 @@ public class FifteenPuzzle {
         );
 
         while (node.parent() != null) {
-            this.solutionPathMatrix.add(node.value());
+            this.solutionPathMatrix.add(FifteenMatrix.from(
+                    node.matrixId()
+            ));
             this.solutionPathDir.add(node.dir());
             node = node.parent();
         }
-        this.solutionPathMatrix.add(node.value());
+        this.solutionPathMatrix.add(FifteenMatrix.from(
+                node.matrixId()
+        ));
 
         Collections.reverse(this.solutionPathMatrix);
         Collections.reverse(this.solutionPathDir);
@@ -157,15 +188,31 @@ public class FifteenPuzzle {
     }
 }
 
-record FifteenMatrixNode(FifteenMatrix value,
+//record FifteenMatrixNode(FifteenMatrix value,
+//                         FifteenMatrixNode parent,
+//                         Direction dir,
+//                         int depth) {
+//    public int cost() {
+//        return this.parent().depth() + this.value().mismatchedTiles();
+//    }
+//
+//    public String toString() {
+//        return this.value.toString();
+//    }
+//}
+
+record FifteenMatrixNode(long matrixId,
                          FifteenMatrixNode parent,
                          Direction dir,
-                         int depth) {
-    public int cost() {
-        return this.parent().depth() + this.value().mismatchedTiles();
-    }
+                         int depth,
+                         int cost) {
 
-    public String toString() {
-        return this.value.toString();
-    }
+//    public int cost() {
+//        return this.parent().depth() +
+//                FifteenMatrix.from(matrixId).mismatchedTiles();
+//    }
+
+//    public String toString() {
+//        return this.value.toString();
+//    }
 }
