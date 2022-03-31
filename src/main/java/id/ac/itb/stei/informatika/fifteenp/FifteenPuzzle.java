@@ -124,12 +124,10 @@ public class FifteenPuzzle {
     }
 
     private void expand(FifteenMatrixNode state) {
-        int states = this.queue.size() + this.evaluatedStates.size();
-        if (states % 1000 == 0) {
-            System.out.println(states);
-        }
-
         for (Direction dir: Direction.DIRECTIONS) {
+            if (dir.flip() == state.dir()) {
+                continue;
+            }
             try {
                 FifteenMatrix newMatrix = FifteenMatrix.from(state.matrixId())
                         .moveBlankTile(dir);

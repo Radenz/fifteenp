@@ -12,4 +12,13 @@ public enum Direction {
             Direction.LEFT,
             Direction.UP,
     };
+
+    public Direction flip() {
+        return switch (this) {
+            case UP -> Direction.DOWN;
+            case DOWN -> Direction.UP;
+            case RIGHT -> Direction.LEFT;
+            case LEFT -> Direction.RIGHT;
+        };
+    }
 }
