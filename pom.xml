@@ -6,8 +6,9 @@
 
     <groupId>id.ac.itb.stei.informatika</groupId>
     <artifactId>fifteenp</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>fifteenp</name>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -50,6 +51,7 @@
     </dependencies>
 
     <build>
+        <finalName>fifteenp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

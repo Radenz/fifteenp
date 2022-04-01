@@ -103,6 +103,7 @@ public class FifteenMatrix extends Matrix<Integer> {
         return newMatrix;
     }
 
+    @Deprecated
     public boolean equals(FifteenMatrix other) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -115,11 +116,13 @@ public class FifteenMatrix extends Matrix<Integer> {
     }
 
     public int lowerSum() {
+        int blankTileIndex = this.blankTileIndex();
+        int factor = (blankTileIndex / 4 + blankTileIndex % 4) % 2;
         int sum = 0;
         for (int i = 1; i < 16; i++) {
             sum += this.lower(i);
         }
-        return sum + this.lowerNull();
+        return sum + this.lowerNull() + factor;
     }
 
     public int lower(Integer value) {

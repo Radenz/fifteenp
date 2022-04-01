@@ -73,9 +73,7 @@ public class FifteenPuzzle {
     }
 
     private void checkSolvability() {
-        int blankTileIndex = this.puzzle.blankTileIndex();
-        int factor = (blankTileIndex / 4 + blankTileIndex % 4) % 2;
-        boolean solvable = (this.puzzle.lowerSum() + factor) % 2 == 0;
+        boolean solvable = this.puzzle.lowerSum() % 2 == 0;
         if (!solvable) {
             throw new IllegalArgumentException();
         }

@@ -5,12 +5,12 @@ import id.ac.itb.stei.informatika.fifteenp.io.FileReader;
 import id.ac.itb.stei.informatika.fifteenp.util.Direction;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -65,7 +65,7 @@ public class MainController {
     private Label stateLabel;
 
     @FXML
-    private Button chooseFileButton;
+    private Label sumLowerLabel;
 
     @FXML
     private Label execTimeLabel;
@@ -95,11 +95,12 @@ public class MainController {
         }
         this.execTimeLabel.setFont(this.defaultFontSmall);
         this.stateLabel.setFont(this.defaultFontSmall);
+        this.sumLowerLabel.setFont(this.defaultFontSmall);
     }
 
     @FXML
     protected void onSolve() {
-        FifteenMatrix matrix = null;
+        FifteenMatrix matrix;
         try {
             this.currentDepth = 0;
             matrix = matrixController.parse();
@@ -110,6 +111,7 @@ public class MainController {
 
         try {
             this.displayLowerValues(matrix);
+            this.displayLowerValuesSum(matrix.lowerSum());
             FifteenPuzzle solver = new FifteenPuzzle(matrix);
             long start = System.nanoTime();
             solver.solve();
@@ -150,7 +152,8 @@ public class MainController {
         }
     }
 
-    @FXML void onPrev() {
+    @FXML
+    protected void onPrev() {
         this.enableNextButton();
         this.currentDepth--;
         this.matrixController.setMatrix(this.solutionPath.get(
@@ -259,6 +262,10 @@ public class MainController {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(message);
         alert.show();
+    }
+
+    private void displayLowerValuesSum(int sum) {
+        this.sumLowerLabel.setText("l values sum:\n" + sum);
     }
 
 }
