@@ -134,19 +134,19 @@ public class MainController {
         this.chooseFileButton.setFont(this.defaultFont);
         this.lowerLabel.setFont(this.defaultFontSmall);
         this.randomButton.setStyle("-fx-background-color: transparent;" +
-                "-fx-text-fill: white;");
+                "-fx-text-fill: white; -fx-cursor: hand;");
         this.randomButton.setBorder(border);
         this.chooseFileButton.setStyle("-fx-background-color: transparent;" +
-                "-fx-text-fill: white;");
+                "-fx-text-fill: white; -fx-cursor: hand;");
         this.chooseFileButton.setBorder(border);
         this.solveButton.setStyle("-fx-background-color: transparent;" +
-                "-fx-text-fill: white;");
+                "-fx-text-fill: white; -fx-cursor: hand;");
         this.solveButton.setBorder(border);
         this.nextButton.setStyle("-fx-background-color: transparent;" +
-                "-fx-text-fill: white;");
+                "-fx-text-fill: white; -fx-cursor: hand;");
         this.nextButton.setBorder(border);
         this.prevButton.setStyle("-fx-background-color: transparent;" +
-                "-fx-text-fill: white;");
+                "-fx-text-fill: white; -fx-cursor: hand;");
         this.prevButton.setBorder(border);
     }
 
