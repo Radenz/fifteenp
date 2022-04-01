@@ -11,7 +11,13 @@ import java.util.ArrayList;
  * @see FifteenMatrix
  */
 public class FifteenMatrixBuilder {
+    /**
+     * The sequence of elements.
+     */
     private Integer[] values;
+    /**
+     * Current amount of elements in the sequence so far.
+     */
     private int cursor;
 
     /**
