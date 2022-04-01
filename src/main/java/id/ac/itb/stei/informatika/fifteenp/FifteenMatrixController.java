@@ -4,13 +4,11 @@ import id.ac.itb.stei.informatika.fifteenp.util.Direction;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrixBuilder;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
 
 public class FifteenMatrixController {
     @FXML
@@ -48,11 +46,13 @@ public class FifteenMatrixController {
 
     private TextArea[] cells;
     private FifteenMatrix currentMatrix;
-    private Border borderStyle;
+    private Border swapBorderStyle;
+    private Border BorderStyle;
+    private Border defaultBorderStyle;
 
     @FXML
     public void initialize() {
-        this.borderStyle = new Border(new BorderStroke(
+        this.swapBorderStyle = new Border(new BorderStroke(
                 Color.valueOf("#ffb300"),
                 BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY,
@@ -66,7 +66,7 @@ public class FifteenMatrixController {
                 cell12, cell13, cell14, cell15,
         };
 
-        Border border = new Border(
+        this.defaultBorderStyle = new Border(
                 new BorderStroke(
                         Color.WHITESMOKE,
                         BorderStrokeStyle.SOLID,
@@ -80,9 +80,9 @@ public class FifteenMatrixController {
                     Font.font("Arial", FontWeight.BOLD, 24)
             );
             cell.setStyle("-fx-background-color: transparent;" +
-                    "-fx-text-fill: #37474f;" +
+                    "-fx-text-fill: whitesmoke;" +
                     "-fx-line-spacing: 0;");
-            cell.setBorder(border);
+            cell.setBorder(defaultBorderStyle);
             cell.textProperty().addListener((observable, oldValue, newValue) -> {
                 if (!newValue.matches("\\d*")) {
                     cell.setText(oldValue);
@@ -113,7 +113,7 @@ public class FifteenMatrixController {
 
     public void setDirection(Direction dir) {
         for (TextArea cell: this.cells) {
-            cell.setBorder(null);
+            cell.setBorder(defaultBorderStyle);
         }
         if (dir != null) {
             int blankTileIndex = this.currentMatrix.blankTileIndex();
@@ -125,8 +125,8 @@ public class FifteenMatrixController {
             };
             TextArea blankTileCell = this.cells[blankTileIndex];
             TextArea swapCell = this.cells[swapIndex];
-            blankTileCell.setBorder(this.borderStyle);
-            swapCell.setBorder(this.borderStyle);
+            blankTileCell.setBorder(this.swapBorderStyle);
+            swapCell.setBorder(this.swapBorderStyle);
         }
     }
 
