@@ -3,42 +3,27 @@ package id.ac.itb.stei.informatika.fifteenp;
 import id.ac.itb.stei.informatika.fifteenp.util.Direction;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrixBuilder;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+/**
+ * {@code FifteenPuzzle} represents a 15-puzzle solver
+ * that holds a single {@code FifteenMatrix} as a puzzle.
+ */
 public class FifteenPuzzle {
-    FifteenMatrix puzzle;
-    PriorityQueue<FifteenMatrixNode> queue;
-    ArrayList<FifteenMatrixNode> evaluatedStates;
+    private FifteenMatrix puzzle;
+    private PriorityQueue<FifteenMatrixNode> queue;
+    private ArrayList<FifteenMatrixNode> evaluatedStates;
 
-    ArrayList<FifteenMatrix> solutionPathMatrix;
-    ArrayList<Direction> solutionPathDir;
+    private ArrayList<FifteenMatrix> solutionPathMatrix;
+    private ArrayList<Direction> solutionPathDir;
 
-    public static void main(String[] args) {
-        FifteenMatrixBuilder builder = new FifteenMatrixBuilder();
-        builder.append(3).append(1).append(2).append(4);
-        builder.append(null).append(5).append(7).append(8);
-        builder.append(10).append(6).append(11).append(12);
-        builder.append(9).append(13).append(14).append(15);
-
-        FifteenMatrix puzzle = builder.build();
-        FifteenPuzzle solver = new FifteenPuzzle(puzzle);
-
-        double start = System.nanoTime();
-        solver.solve();
-        double end = System.nanoTime();
-
-        ArrayList<FifteenMatrix> path = solver.getSolutionPathMatrix();
-        ArrayList<Direction> pathDir = solver.getSolutionPathDir();
-
-        System.out.println((end - start) * 1e-9 + " seconds.");
-
-    }
-
+    /**
+     * The solution of the 15-puzzle as a
+     * {@code FifteenMatrix} object.
+     */
     public static final FifteenMatrix SOLUTION
         = new FifteenMatrixBuilder()
             .append(1).append(2).append(3).append(4)
@@ -47,9 +32,19 @@ public class FifteenPuzzle {
             .append(13).append(14).append(15).append(null)
             .build();
 
+    /**
+     * The integer representation of the 15-puzzle
+     * solution.
+     */
     public static final long SOLUTION_ID
             = FifteenPuzzle.SOLUTION.identity();
 
+    /**
+     * Creates a new {@code FifteenPuzzle} to solve a
+     * specific puzzle based on specified {@code FifteenMatrix}
+     * object as its puzzle.
+     * @param puzzle the puzzle to solve
+     */
     public FifteenPuzzle(FifteenMatrix puzzle) {
         this.puzzle = puzzle;
         this.queue = new PriorityQueue<>(Comparator.comparingInt(FifteenMatrixNode::cost));
@@ -58,6 +53,10 @@ public class FifteenPuzzle {
         this.solutionPathDir = new ArrayList<>();
     }
 
+    /**
+     * Solves the given puzzle using branch and bound
+     * algorithm.
+     */
     public void solve() {
         this.checkSolvability();
         this.setup();
@@ -72,13 +71,23 @@ public class FifteenPuzzle {
         this.buildSolution();
     }
 
-    private void checkSolvability() {
+    /**
+     * Checks if the given puzzle is solvable.
+     * @throws IllegalArgumentException if the given
+     *         puzzle is unsolvable
+     */
+    private void checkSolvability() throws IllegalArgumentException {
         boolean solvable = this.puzzle.lowerSum() % 2 == 0;
         if (!solvable) {
             throw new IllegalArgumentException();
         }
     }
 
+    /**
+     * Sets the puzzle as the first state of the
+     * solving process using branch and bound
+     * algorithm.
+     */
     private void setup() {
         this.queue.add(new FifteenMatrixNode(
                 this.puzzle.identity(),
@@ -89,22 +98,15 @@ public class FifteenPuzzle {
         ));
     }
 
-//    private boolean has(FifteenMatrix state) {
-//        for (FifteenMatrixNode node: this.evaluatedStates) {
-//            if (node.value().equals(state)) {
-//                return true;
-//            }
-//        }
-//
-//        for (FifteenMatrixNode node: this.queue) {
-//            if (node.value().equals(state)) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-
+    /**
+     * Checks if the solver has already enqueued or
+     * expanded a specific matrix represented by
+     * the specified long integer.
+     * @param stateMatrixId long integer representing
+     *                      the matrix to check
+     * @return true if the matrix has already been
+     *         enqueued or expanded
+     */
     private boolean has(long stateMatrixId) {
         for (FifteenMatrixNode node: this.evaluatedStates) {
             if (node.matrixId() == stateMatrixId) {
@@ -121,6 +123,12 @@ public class FifteenPuzzle {
         return false;
     }
 
+    /**
+     * Expands a specified state. This method will enqueue
+     * all child states of the specified state and move
+     * the specified state to the evaluated states list.
+     * @param state the state to expand
+     */
     private void expand(FifteenMatrixNode state) {
         for (Direction dir: Direction.DIRECTIONS) {
             if (dir.flip() == state.dir()) {
@@ -151,6 +159,9 @@ public class FifteenPuzzle {
         this.evaluatedStates.add(state);
     }
 
+    /**
+     * Builds the solution path of this {@code FifteenPuzzle}.
+     */
     private void buildSolution() {
         FifteenMatrixNode node = this.evaluatedStates.get(
                 this.evaluatedStates.size() - 1
@@ -171,44 +182,53 @@ public class FifteenPuzzle {
         Collections.reverse(this.solutionPathDir);
     }
 
+    /**
+     * Retrieves solution path to reach the goal state
+     * of this {@code FifteenPuzzle} as a list of
+     * {@code FifteenMatrix}.
+     * @return the solution path to the goal state as a
+     *         list of {@code FifteenMatrix}
+     */
     public ArrayList<FifteenMatrix> getSolutionPathMatrix() {
         return this.solutionPathMatrix;
     }
 
+    /**
+     * Retrieves solution path to reach the goal state
+     * of this {@code FifteenPuzzle} as a list of
+     * {@code Direction}.
+     * @return the solution path to the goal state as a
+     *         list of {@code Direction}
+     */
     public ArrayList<Direction> getSolutionPathDir() {
         return this.solutionPathDir;
     }
 
+    /**
+     * Counts the amount of generated states to solve this
+     * {@code FifteenPuzzle}.
+     * @return the amount of generated states
+     */
     public int generatedStates() {
         return this.queue.size() + this.evaluatedStates.size();
     }
 }
 
-//record FifteenMatrixNode(FifteenMatrix value,
-//                         FifteenMatrixNode parent,
-//                         Direction dir,
-//                         int depth) {
-//    public int cost() {
-//        return this.parent().depth() + this.value().mismatchedTiles();
-//    }
-//
-//    public String toString() {
-//        return this.value.toString();
-//    }
-//}
-
+/**
+ * {@code FifteenMatrixNode} represents a state or
+ * tree node in the branch and bound algorithm while
+ * solving the 15-puzzle.
+ * @param matrixId  the long integer representation of
+ *                  the {@code FifteenMatrix} this state holds
+ * @param parent    parent state of this state
+ * @param dir       the direction that the blank tile was moved
+ *                  to reach this state
+ * @param depth     depth of this state
+ * @param cost      cost to expand this state
+ */
 record FifteenMatrixNode(long matrixId,
                          FifteenMatrixNode parent,
                          Direction dir,
                          int depth,
                          int cost) {
-
-//    public int cost() {
-//        return this.parent().depth() +
-//                FifteenMatrix.from(matrixId).mismatchedTiles();
-//    }
-
-//    public String toString() {
-//        return this.value.toString();
-//    }
 }
