@@ -244,22 +244,24 @@ public class MainController {
     private void onChooseFile() {
         FileChooser dialog = new FileChooser();
         File input = dialog.showOpenDialog(null);
-        String filename = input.toString();
+        if (input != null) {
+            String filename = input.toString();
 
-        FileReader reader = new FileReader();
-        try {
-            reader.readFile(filename);
-        } catch (Throwable ignored) {
-            this.alert("There was an error reading the file.");
-        }
+            FileReader reader = new FileReader();
+            try {
+                reader.readFile(filename);
+            } catch (Throwable ignored) {
+                this.alert("There was an error reading the file.");
+            }
 
-        try {
-            String fileContent = reader.result();
-            FifteenMatrixParser parser = new FifteenMatrixParser();
-            parser.parse(fileContent);
-            this.matrixController.setMatrix(parser.result());
-        } catch (Throwable ignored) {
-            this.alert("The file has an invalid format.");
+            try {
+                String fileContent = reader.result();
+                FifteenMatrixParser parser = new FifteenMatrixParser();
+                parser.parse(fileContent);
+                this.matrixController.setMatrix(parser.result());
+            } catch (Throwable ignored) {
+                this.alert("The file has an invalid format.");
+            }
         }
     }
 
