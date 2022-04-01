@@ -154,7 +154,6 @@ public class MainController {
     protected void onSolve() {
         FifteenMatrix matrix;
         try {
-            this.currentDepth = 0;
             matrix = matrixController.parse();
         } catch (IllegalArgumentException ignored) {
             this.alert("The given matrix is invalid.");
@@ -162,6 +161,7 @@ public class MainController {
         }
 
         try {
+            this.currentDepth = 0;
             this.displayLowerValues(matrix);
             this.displayLowerValuesSum(matrix.lowerSum());
             FifteenPuzzle solver = new FifteenPuzzle(matrix);
