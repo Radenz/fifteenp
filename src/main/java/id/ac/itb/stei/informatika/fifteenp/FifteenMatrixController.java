@@ -51,10 +51,10 @@ public class FifteenMatrixController {
     @FXML
     public void initialize() {
         this.borderStyle = new Border(new BorderStroke(
-                Color.valueOf("#42a5f5"),
-                BorderStrokeStyle.DASHED,
+                Color.valueOf("#ffb300"),
+                BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY,
-                new BorderWidths(2)
+                BorderStroke.THICK
         ));
 
         this.cells = new TextArea[]{

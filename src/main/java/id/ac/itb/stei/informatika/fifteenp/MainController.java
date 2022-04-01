@@ -5,9 +5,12 @@ import id.ac.itb.stei.informatika.fifteenp.io.FileReader;
 import id.ac.itb.stei.informatika.fifteenp.util.Direction;
 import id.ac.itb.stei.informatika.fifteenp.util.FifteenMatrix;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
@@ -21,7 +24,8 @@ public class MainController {
 
     @FXML
     private FifteenMatrixController matrixController;
-
+    @FXML
+    private GridPane mainContainer;
     @FXML
     private Label labelCell0;
     @FXML
@@ -60,13 +64,19 @@ public class MainController {
     @FXML
     private Button nextButton;
     @FXML
+    private Button chooseFileButton;
+    @FXML
+    private Button solveButton;
+    @FXML
+    private Button randomButton;
+    @FXML
     private Label dirLabel;
     @FXML
     private Label stateLabel;
-
     @FXML
     private Label sumLowerLabel;
-
+    @FXML
+    private Label lowerLabel;
     @FXML
     private Label execTimeLabel;
 
@@ -81,6 +91,9 @@ public class MainController {
 
     @FXML
     private void initialize() {
+        this.mainContainer.setBackground(new Background(
+                new BackgroundFill(Color.valueOf("#37474f"), null, null)
+        ));
         this.labelCells = new Label[]{
                 labelCell0, labelCell1, labelCell2, labelCell3,
                 labelCell4, labelCell5, labelCell6, labelCell7,
@@ -92,10 +105,32 @@ public class MainController {
         this.prevButton.setFont(this.defaultFont);
         for (Label cell: this.labelCells) {
             cell.setFont(this.defaultFont);
+            cell.getStyleClass().add("white");
+            cell.setBorder(new Border(
+                    new BorderStroke(
+                    Color.WHITESMOKE,
+                    BorderStrokeStyle.SOLID,
+                    CornerRadii.EMPTY,
+                    BorderStroke.DEFAULT_WIDTHS
+            )));
+            cell.getParent().getParent().prefHeight(Double.POSITIVE_INFINITY);
+            cell.getParent().getParent().prefWidth(Double.POSITIVE_INFINITY);
+            HBox parent = (HBox) cell.getParent();
+            VBox grandParent = (VBox) parent.getParent();
+            parent.prefHeightProperty().bind(grandParent.heightProperty());
+            parent.prefWidthProperty().bind(grandParent.widthProperty());
+            cell.prefHeightProperty().bind(parent.heightProperty());
+            cell.prefWidthProperty().bind(parent.widthProperty());
+            cell.setTextAlignment(TextAlignment.CENTER);
+            cell.setAlignment(Pos.CENTER);
         }
         this.execTimeLabel.setFont(this.defaultFontSmall);
         this.stateLabel.setFont(this.defaultFontSmall);
-        this.sumLowerLabel.setFont(this.defaultFontSmall);
+        this.sumLowerLabel.setFont(this.defaultFontBig);
+        this.solveButton.setFont(this.defaultFont);
+        this.randomButton.setFont(this.defaultFont);
+        this.chooseFileButton.setFont(this.defaultFont);
+        this.lowerLabel.setFont(this.defaultFontSmall);
     }
 
     @FXML
@@ -264,8 +299,8 @@ public class MainController {
         alert.show();
     }
 
-    private void displayLowerValuesSum(int sum) {
-        this.sumLowerLabel.setText("l values sum:\n" + sum);
+    private void displayLowerValuesSum(Integer sum) {
+        this.sumLowerLabel.setText(sum.toString());
     }
 
 }

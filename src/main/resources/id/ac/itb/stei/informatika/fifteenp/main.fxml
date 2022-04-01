@@ -13,7 +13,8 @@
         fx:controller="id.ac.itb.stei.informatika.fifteenp.MainController"
         prefWidth="Infinity"
         prefHeight="Infinity"
-        gridLinesVisible="true"
+        fx:id="mainContainer"
+        stylesheets="@style.css"
 >
     <rowConstraints>
         <RowConstraints
@@ -40,7 +41,6 @@
         <GridPane
                 prefWidth="Infinity"
                 prefHeight="Infinity"
-                gridLinesVisible="true"
                 GridPane.rowIndex="1"
         >
             <rowConstraints>
@@ -54,9 +54,8 @@
             <children>
                 <GridPane
                         GridPane.columnIndex="0"
-                        gridLinesVisible="true"
                         style="-fx-padding: 24;"
-                        hgap="12"
+                        hgap="8"
                 >
                     <rowConstraints>
                         <RowConstraints percentHeight="100" />
@@ -69,7 +68,6 @@
                     <children>
                         <GridPane
                                 GridPane.columnIndex="0"
-                                gridLinesVisible="true"
                                 stylesheets="@style.css"
                         >
                             <rowConstraints>
@@ -263,15 +261,43 @@
                                 </VBox>
                             </children>
                         </GridPane>
-                        <VBox alignment="CENTER"
-                              GridPane.columnIndex="1">
-                            <HBox alignment="CENTER">
-                                <Label
-                                        textAlignment="CENTER"
-                                        fx:id="sumLowerLabel"
-                                />
-                            </HBox>
-                        </VBox>
+                        <GridPane
+                              GridPane.columnIndex="1"
+                              vgap="8"
+                        >
+                            <rowConstraints>
+                                <RowConstraints percentHeight="40"/>
+                                <RowConstraints percentHeight="60"/>
+                            </rowConstraints>
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="100"/>
+                            </columnConstraints>
+                            <children>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="0">
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                textAlignment="CENTER"
+                                                wrapText="true"
+                                                text="l values sum"
+                                                styleClass="white"
+                                                fx:id="lowerLabel"
+                                        />
+                                    </HBox>
+                                </VBox>
+                                <VBox alignment="CENTER"
+                                      GridPane.rowIndex="1">
+                                    <HBox alignment="CENTER">
+                                        <Label
+                                                textAlignment="CENTER"
+                                                wrapText="true"
+                                                styleClass="white"
+                                                fx:id="sumLowerLabel"
+                                        />
+                                    </HBox>
+                                </VBox>
+                            </children>
+                        </GridPane>
                         <VBox alignment="CENTER"
                               GridPane.columnIndex="2">
                             <HBox alignment="CENTER">
@@ -280,7 +306,9 @@
                                         maxHeight="Infinity"
                                         prefWidth="108"
                                         maxWidth="Infinity"
+                                        HBox.hgrow="SOMETIMES"
                                         text="SOLVE"
+                                        fx:id="solveButton"
                                         onMouseClicked="#onSolve"
                                 />
                             </HBox>
@@ -289,7 +317,6 @@
                 </GridPane>
                 <GridPane
                         GridPane.columnIndex="1"
-                        gridLinesVisible="true"
                         style="-fx-padding: 24;"
                 >
                     <rowConstraints>
@@ -321,6 +348,7 @@
                             <HBox alignment="CENTER">
                                 <Label
                                         prefHeight="72"
+                                        styleClass="white"
                                         fx:id="dirLabel"
                                 />
                             </HBox>
@@ -343,7 +371,6 @@
                 </GridPane>
                 <GridPane
                         GridPane.columnIndex="2"
-                        gridLinesVisible="true"
                         hgap="4"
                         style="-fx-padding: 24;"
                 >
@@ -364,7 +391,9 @@
                                         prefHeight="36"
                                         prefWidth="96"
                                         maxWidth="Infinity"
+                                        HBox.hgrow="SOMETIMES"
                                         text="RANDOM"
+                                        fx:id="randomButton"
                                         onMouseClicked="#onRandom"
                                 />
                             </HBox>
@@ -377,6 +406,7 @@
                                         prefHeight="36"
                                         prefWidth="96"
                                         maxWidth="Infinity"
+                                        HBox.hgrow="SOMETIMES"
                                         text="Choose File ..."
                                         fx:id="chooseFileButton"
                                         onMouseClicked="#onChooseFile"
@@ -388,6 +418,8 @@
                               GridPane.rowIndex="1">
                             <HBox alignment="CENTER">
                                 <Label
+                                        wrapText="true"
+                                        styleClass="white"
                                         fx:id="execTimeLabel"
                                 />
                             </HBox>
@@ -397,6 +429,8 @@
                               GridPane.rowIndex="1">
                             <HBox alignment="CENTER">
                                 <Label
+                                        wrapText="true"
+                                        styleClass="white"
                                         fx:id="stateLabel"
                                 />
                             </HBox>

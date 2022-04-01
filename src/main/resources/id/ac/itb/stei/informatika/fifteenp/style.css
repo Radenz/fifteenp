@@ -2,3 +2,7 @@
     -fx-text-alignment: center;
     -fx-background-color: blue;
 }
+
+.white {
+    -fx-text-fill: white;
+}
