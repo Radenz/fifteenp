@@ -94,6 +94,14 @@ public class MainController {
         this.mainContainer.setBackground(new Background(
                 new BackgroundFill(Color.valueOf("#37474f"), null, null)
         ));
+        Border border = new Border(
+                new BorderStroke(
+                        Color.WHITESMOKE,
+                        BorderStrokeStyle.SOLID,
+                        CornerRadii.EMPTY,
+                        BorderStroke.DEFAULT_WIDTHS
+                )
+        );
         this.labelCells = new Label[]{
                 labelCell0, labelCell1, labelCell2, labelCell3,
                 labelCell4, labelCell5, labelCell6, labelCell7,
@@ -106,13 +114,7 @@ public class MainController {
         for (Label cell: this.labelCells) {
             cell.setFont(this.defaultFont);
             cell.getStyleClass().add("white");
-            cell.setBorder(new Border(
-                    new BorderStroke(
-                    Color.WHITESMOKE,
-                    BorderStrokeStyle.SOLID,
-                    CornerRadii.EMPTY,
-                    BorderStroke.DEFAULT_WIDTHS
-            )));
+            cell.setBorder(border);
             cell.getParent().getParent().prefHeight(Double.POSITIVE_INFINITY);
             cell.getParent().getParent().prefWidth(Double.POSITIVE_INFINITY);
             HBox parent = (HBox) cell.getParent();
@@ -131,6 +133,21 @@ public class MainController {
         this.randomButton.setFont(this.defaultFont);
         this.chooseFileButton.setFont(this.defaultFont);
         this.lowerLabel.setFont(this.defaultFontSmall);
+        this.randomButton.setStyle("-fx-background-color: transparent;" +
+                "-fx-text-fill: white;");
+        this.randomButton.setBorder(border);
+        this.chooseFileButton.setStyle("-fx-background-color: transparent;" +
+                "-fx-text-fill: white;");
+        this.chooseFileButton.setBorder(border);
+        this.solveButton.setStyle("-fx-background-color: transparent;" +
+                "-fx-text-fill: white;");
+        this.solveButton.setBorder(border);
+        this.nextButton.setStyle("-fx-background-color: transparent;" +
+                "-fx-text-fill: white;");
+        this.nextButton.setBorder(border);
+        this.prevButton.setStyle("-fx-background-color: transparent;" +
+                "-fx-text-fill: white;");
+        this.prevButton.setBorder(border);
     }
 
     @FXML

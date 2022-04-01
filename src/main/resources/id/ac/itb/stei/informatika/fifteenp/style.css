@@ -1,6 +1,6 @@
 .centered *.text {
     -fx-text-alignment: center;
-    -fx-background-color: blue;
+    -fx-background-color: transparent;
 }
 
 .white {

@@ -40,101 +40,181 @@
         />
     </columnConstraints>
     <children>
-        <TextArea
-                GridPane.rowIndex="0"
-                GridPane.columnIndex="0"
-                fx:id="cell0"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="0"
-                GridPane.columnIndex="1"
-                fx:id="cell1"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="0"
-                GridPane.columnIndex="2"
-                fx:id="cell2"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="0"
-                GridPane.columnIndex="3"
-                fx:id="cell3"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="1"
-                GridPane.columnIndex="0"
-                fx:id="cell4"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="1"
-                GridPane.columnIndex="1"
-                fx:id="cell5"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="1"
-                GridPane.columnIndex="2"
-                fx:id="cell6"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="1"
-                GridPane.columnIndex="3"
-                fx:id="cell7"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="2"
-                GridPane.columnIndex="0"
-                fx:id="cell8"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="2"
-                GridPane.columnIndex="1"
-                fx:id="cell9"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="2"
-                GridPane.columnIndex="2"
-                fx:id="cell10"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="2"
-                GridPane.columnIndex="3"
-                fx:id="cell11"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="3"
-                GridPane.columnIndex="0"
-                fx:id="cell12"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="3"
-                GridPane.columnIndex="1"
-                fx:id="cell13"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="3"
-                GridPane.columnIndex="2"
-                fx:id="cell14"
-                styleClass="centered"
-        />
-        <TextArea
-                GridPane.rowIndex="3"
-                GridPane.columnIndex="3"
-                fx:id="cell15"
-                styleClass="centered"
-        />
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="0"
+              GridPane.columnIndex="0"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell0"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="0"
+              GridPane.columnIndex="1"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell1"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="0"
+              GridPane.columnIndex="2"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell2"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="0"
+              GridPane.columnIndex="3"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell3"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="1"
+              GridPane.columnIndex="0"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell4"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="1"
+              GridPane.columnIndex="1"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell5"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="1"
+              GridPane.columnIndex="2"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell6"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="1"
+              GridPane.columnIndex="3"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell7"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="2"
+              GridPane.columnIndex="0"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell8"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="2"
+              GridPane.columnIndex="1"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell9"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="2"
+              GridPane.columnIndex="2"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell10"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="2"
+              GridPane.columnIndex="3"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell11"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="3"
+              GridPane.columnIndex="0"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell12"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="3"
+              GridPane.columnIndex="1"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell13"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="3"
+              GridPane.columnIndex="2"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell14"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER"
+              GridPane.rowIndex="3"
+              GridPane.columnIndex="3"
+        >
+            <HBox alignment="CENTER">
+                <TextArea
+                        fx:id="cell15"
+                        styleClass="centered"
+                />
+            </HBox>
+        </VBox>
     </children>
 </GridPane>
