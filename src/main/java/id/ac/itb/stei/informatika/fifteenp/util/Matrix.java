@@ -9,9 +9,17 @@ import java.util.ArrayList;
  */
 public class Matrix<T> {
 
+    /**
+     * The number of rows this {@code Matrix} has.
+     */
     protected final int rows;
+    /**
+     * The number of columns this {@code Matrix} has.
+     */
     protected final int cols;
-
+    /**
+     * Values stored in this {@code Matrix}.
+     */
     ArrayList<ArrayList<T>> values;
 
     /**

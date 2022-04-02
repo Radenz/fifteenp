@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"id.ac.itb.stei.informatika.fifteenp","l":"id.ac.itb.stei.informatika.fifteenp"},{"m":"id.ac.itb.stei.informatika.fifteenp","l":"id.ac.itb.stei.informatika.fifteenp.io"},{"m":"id.ac.itb.stei.informatika.fifteenp","l":"id.ac.itb.stei.informatika.fifteenp.util"}];updateSearchResults();
