@@ -349,7 +349,7 @@
                                 <Label
                                         prefHeight="72"
                                         styleClass="white"
-                                        fx:id="dirLabel"
+                                        fx:id="depthLabel"
                                 />
                             </HBox>
                         </VBox>

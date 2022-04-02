@@ -7,6 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * {@code Application} is the main class of the 15-puzzle
+ * solver application.
+ */
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
@@ -18,6 +22,10 @@ public class Application extends javafx.application.Application {
         stage.show();
     }
 
+    /**
+     * Entry point of the 15-puzzle solver application.
+     * @param args cli arguments
+     */
     public static void main(String[] args) {
         launch();
     }

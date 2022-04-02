@@ -15,80 +15,192 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The controller of main scene root component.
+ */
 public class MainController {
-
+    /**
+     * Controller of the matrix grid display.
+     */
     @FXML
     private FifteenMatrixController matrixController;
+    /**
+     * The root element of the main scene.
+     */
     @FXML
     private GridPane mainContainer;
+    /**
+     * Label for the value of l(1).
+     */
     @FXML
     private Label labelCell0;
+    /**
+     * Label for the value of l(2).
+     */
     @FXML
     private Label labelCell1;
+    /**
+     * Label for the value of l(3).
+     */
     @FXML
     private Label labelCell2;
+    /**
+     * Label for the value of l(4).
+     */
     @FXML
     private Label labelCell3;
+    /**
+     * Label for the value of l(5).
+     */
     @FXML
     private Label labelCell4;
+    /**
+     * Label for the value of l(6).
+     */
     @FXML
     private Label labelCell5;
+    /**
+     * Label for the value of l(7).
+     */
     @FXML
     private Label labelCell6;
+    /**
+     * Label for the value of l(8).
+     */
     @FXML
     private Label labelCell7;
+    /**
+     * Label for the value of l(9).
+     */
     @FXML
     private Label labelCell8;
+    /**
+     * Label for the value of l(10).
+     */
     @FXML
     private Label labelCell9;
+    /**
+     * Label for the value of l(11).
+     */
     @FXML
     private Label labelCell10;
+    /**
+     * Label for the value of l(12).
+     */
     @FXML
     private Label labelCell11;
+    /**
+     * Label for the value of l(13).
+     */
     @FXML
     private Label labelCell12;
+    /**
+     * Label for the value of l(14).
+     */
     @FXML
     private Label labelCell13;
+    /**
+     * Label for the value of l(15).
+     */
     @FXML
     private Label labelCell14;
+    /**
+     * Label for the value of l(16).
+     */
     @FXML
     private Label labelCell15;
-
+    /**
+     * The button to navigate displayed state backwards.
+     */
     @FXML
     private Button prevButton;
+    /**
+     * The button to navigate displayed state forwards.
+     */
     @FXML
     private Button nextButton;
+    /**
+     * The button to choose a file input.
+     */
     @FXML
     private Button chooseFileButton;
+    /**
+     * The button to start solving the given 15-puzzle.
+     */
     @FXML
     private Button solveButton;
+    /**
+     * The button to randomize displayed 15-puzzle.
+     */
     @FXML
     private Button randomButton;
+    /**
+     * Label to display current state depth.
+     */
     @FXML
-    private Label dirLabel;
+    private Label depthLabel;
+    /**
+     * Label to display total generated states.
+     */
     @FXML
     private Label stateLabel;
+    /**
+     * Label to display the sum of all l values and x value.
+     */
     @FXML
     private Label sumLowerLabel;
+    /**
+     * Label that display the text "l values sum".
+     */
     @FXML
     private Label lowerLabel;
+    /**
+     * Label to display total execution time.
+     */
     @FXML
     private Label execTimeLabel;
-
+    /**
+     * Array of all available l value labels.
+     */
     private Label[] labelCells;
+    /**
+     * Current displayed solution path as an array
+     * of {@code FifteenMatrix} objects.
+     */
     private ArrayList<FifteenMatrix> solutionPath;
+    /**
+     * Current displayed solution path as an array
+     * of {@code Direction} objects.
+     */
     private ArrayList<Direction> solutionDir;
+    /**
+     * Current displayed state depth.
+     */
     private int currentDepth;
+    /**
+     * Default font of the display with normal font size.
+     */
     private final Font defaultFont = Font.font("Arial", FontWeight.BOLD, 16);
+    /**
+     * Default font of the display with small font size.
+     */
     private final Font defaultFontSmall = Font.font("Arial", FontWeight.BOLD, 12);
+    /**
+     * Default font of the display with big font size.
+     */
     private final Font defaultFontBig = Font.font("Arial", FontWeight.BOLD, 20);
+    /**
+     * Time units to display the execution time.
+     */
     private final String[] postfix = {"ns", "us", "ms", "s"};
 
+    /**
+     * Initializes this controller.
+     */
     @FXML
     private void initialize() {
         this.mainContainer.setBackground(new Background(
@@ -108,7 +220,7 @@ public class MainController {
                 labelCell8, labelCell9, labelCell10, labelCell11,
                 labelCell12, labelCell13, labelCell14, labelCell15,
         };
-        this.dirLabel.setFont(this.defaultFontBig);
+        this.depthLabel.setFont(this.defaultFontBig);
         this.nextButton.setFont(this.defaultFont);
         this.prevButton.setFont(this.defaultFont);
         for (Label cell: this.labelCells) {
@@ -150,6 +262,9 @@ public class MainController {
         this.prevButton.setBorder(border);
     }
 
+    /**
+     * The solve button click event handler.
+     */
     @FXML
     protected void onSolve() {
         FifteenMatrix matrix;
@@ -184,6 +299,9 @@ public class MainController {
         }
     }
 
+    /**
+     * The next button click event handler.
+     */
     @FXML
     protected void onNext() {
         this.enablePrevButton();
@@ -204,6 +322,9 @@ public class MainController {
         }
     }
 
+    /**
+     * The previous button click event handler.
+     */
     @FXML
     protected void onPrev() {
         this.enableNextButton();
@@ -220,6 +341,9 @@ public class MainController {
         }
     }
 
+    /**
+     * The random button click event handler.
+     */
     @FXML
     protected void onRandom() {
         Random random = new Random();
@@ -240,6 +364,9 @@ public class MainController {
         this.matrixController.setMatrix(matrix);
     }
 
+    /**
+     * The choose file button click event handler.
+     */
     @FXML
     private void onChooseFile() {
         FileChooser dialog = new FileChooser();
@@ -265,31 +392,56 @@ public class MainController {
         }
     }
 
+    /**
+     * Display the depth of the state of the current displayed
+     * state matrix.
+     * @param depth     current displayed state matrix depth
+     * @param maxDepth  the goal state matrix depth
+     */
     private void setLabelText(int depth, int maxDepth) {
-        this.dirLabel.setText(depth + "/" + maxDepth);
+        this.depthLabel.setText(depth + "/" + maxDepth);
     }
 
+    /**
+     * Display total generated states.
+     * @param states total generated states
+     */
     private void setGeneratedStatesText(Integer states) {
         this.stateLabel.setText("Generated "
                 + states.toString() + " states");
     }
 
+    /**
+     * Disables the previous button.
+     */
     private void disablePrevButton() {
         prevButton.setDisable(true);
     }
 
+    /**
+     * Enables the previous button.
+     */
     private void enablePrevButton() {
         prevButton.setDisable(false);
     }
 
+    /**
+     * Disables the next button.
+     */
     private void disableNextButton() {
         nextButton.setDisable(true);
     }
 
+    /**
+     * Enables the previous button.
+     */
     private void enableNextButton() {
         nextButton.setDisable(false);
     }
 
+    /**
+     * Displays all l values in the corresponding l value labels.
+     */
     private void displayLowerValues(FifteenMatrix matrix) {
         for (int i = 1; i < 16; i++) {
             Integer l = matrix.lower(i);
@@ -299,6 +451,10 @@ public class MainController {
         this.labelCells[15].setText(l.toString());
     }
 
+    /**
+     * Displays the execution time duration.
+     * @param duration the execution time to display
+     */
     private void displayExecutionTime(double duration) {
         int i = 0;
         double factor = 1;
@@ -312,12 +468,20 @@ public class MainController {
         this.execTimeLabel.setText(execTime);
     }
 
+    /**
+     * Shows an error alerts to the user.
+     * @param message error message to show
+     */
     private void alert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(message);
         alert.show();
     }
 
+    /**
+     * Displays the sum of all l values and x value.
+     * @param sum the sum to display
+     */
     private void displayLowerValuesSum(Integer sum) {
         this.sumLowerLabel.setText(sum.toString());
     }
