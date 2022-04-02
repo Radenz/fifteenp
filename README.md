@@ -12,7 +12,7 @@
     <br />
     <a href="demo">View demo</a>
     ·
-    <a href="">Documentation</a>
+    <a href="https://fifteenp-docs.web.app/">Documentation</a>
 </div>
 
 #### Table of Contents
@@ -121,7 +121,7 @@ There are various methods to specify 15-puzzle input for the application
 to solve. Within the application, there is a 4 x 4 grid for the puzzle to
 display.
 
-<img src="images/grid.png" alt="Matrix grid." width="150">
+<img src="images/grid.png" alt="Matrix grid." width="200">
 
 You can directly modify the value inside each cell in the grid to 0-15 or
 blank. You can also do this after solving another puzzle beforehand.
@@ -144,7 +144,7 @@ For example, this is a valid text input file as can be seen in [13.txt](test/13.
 Once you have your text file ready, you can import them by pressing
 the `Choose File ...` button in the bottom right corner.
 
-<img src="images/brc.png" alt="Bottom left corner buttons.">
+<img src="images/brc.png" height="64" alt="Bottom left corner buttons.">
 
 The third way to specify an input is _to not specify it_. By pressing
 the `RANDOM` button, the application will randomize the grid with a
@@ -157,7 +157,7 @@ to do is to press the `SOLVE` button to start solving the puzzle.
 After the puzzle is solved, there will be several output within the
 application including the first move of the solution.
 
-<img src="images/first-move.png" width="150" alt="Solution output first move.">
+<img src="images/first-move.png" width="200" alt="Solution output first move.">
 
 ### Reading the output
 
@@ -168,19 +168,19 @@ l-value of each cell in the puzzle. The `l values sum` is the sum
 of all l-values and the x value. For more information, see
 [Branch and Bound lecture note](http://www.cs.umsl.edu/~sanjiv/classes/cs5130/lectures/bb.pdf).
 
-<img src="images/lvalues.png" width="200" alt="Solution output l-value.">
+<img src="images/lvalues.png" height="200" alt="Solution output l-value.">
 
 In the bottom right corner, there is also an output of the **solving duration**
 and **total generated states** during the solving process.
 
-<img src="images/meta.png" alt="Solution output metadata.">
+<img src="images/meta.png" alt="Solution output metadata." height="100">
 
 In the middle, there is a depth indication of the current state
 in the solution path to reach the goal state. For example, in the
 following image, we are currently in depth 3 of the solution;
 whereas the goal is on the depth 13.
 
-<img src="images/nav.png" alt="Solution output navigation.">
+<img src="images/nav.png" alt="Solution output navigation." height="100">
 
 There are also next and previous button to navigate the state backwards
 and forwards, respectively, throughout the solution path.
