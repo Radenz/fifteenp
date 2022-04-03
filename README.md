@@ -89,7 +89,7 @@ inside `target` directory. You will now need to package the
 artifact and runtime image into a binary executable with
 `jpackage` tool.
 ```
-jpackage -t app-image --input target --main-jar fifteenp.jar --main-class id.ac.itb.stei.informatika.fifteenp.Application --runtime-image target/image --dest bin --name fifteenp
+jpackage -t app-image --input target/artifacts --main-jar fifteenp.jar --main-class id.ac.itb.stei.informatika.fifteenp.Application --runtime-image target/image --dest bin --name fifteenp
 ```
 Wait until the packaging is finished and there should now
 be a `fifteenp` directory inside the `bin` directory with
